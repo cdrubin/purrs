@@ -8,12 +8,25 @@ source lib/bash_ui.sh
 MEMORY=4096
 CPUS=2
 
-# if no minikube environent try to delete and create one
-if [ $(minikube status | grep 'Running' | wc -l) -ne 3 ]; then
-    echo "purrs minikube environment not running, recreating..."
-    minikube delete && minikube start --memory=$MEMORY --cpus=$CPUS
-fi
+# save the current minikube profile to pop back after status call
+MINIKUBE_PROFILE=$(./lib/mkube.sh profile)
 
+# check that minikube profile purrs exists
+if ! ./lib/mkube.sh profile list | grep purrs > /dev/null; then
+    echo "purrs minikube profile not found, creating..."
+    ./lib/mkube.sh profile delete purrs && ./lib/mkube.sh profile create purrs --memory=$MEMORY --cpus=$CPUS
+else
+    # check purrs status and restore profile after
+    ./lib/mkube.sh profile purrs > /dev/null
+    RUNNING=$(minikube status | grep 'Running' | wc -l)
+    CONFIGURED=$(minikube status | grep 'Configured' | wc -l)
+    ./lib/mkube.sh profile $MINIKUBE_PROFILE > /dev/null
+    
+    if [[ $RUNNING -ne 3 || $CONFIGURED -ne 1 ]]; then
+        echo "purrs minikube profile errors, recreating..."
+        ./lib/mkube.sh profile delete purrs && ./lib/mkube.sh profile create purrs --memory=$MEMORY --cpus=$CPUS
+    fi
+fi
 
 # if source code not initialized then initialize
 
@@ -31,6 +44,6 @@ APP_ENV=$CHOSEN
 # substitute the TARGET name into kustomize directory name
 sed -i "s#overlays.*#overlays/${APP_ENV}#" skaffold.yaml
 
-skaffold dev --port-forward --profile deployment
+skaffold dev --port-forward --profile deployment --minikube-profile purrs
 
 popd > /dev/null
