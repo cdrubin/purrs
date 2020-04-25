@@ -1,0 +1,22 @@
+DIRECTORY=$(shell basename $(CURDIR))
+IMAGE="purrs-${DIRECTORY}-image"
+CONTAINER="purrs-${DIRECTORY}-container"
+
+build:
+	docker build . -t ${IMAGE}
+	
+run:
+	-docker stop ${CONTAINER}
+	-docker rm ${CONTAINER}
+	docker run -d -it --privileged --name=${CONTAINER} --entrypoint /bin/sh ${IMAGE}
+
+login:
+	-docker exec -it ${CONTAINER} /bin/sh --login
+
+debug: build run login
+	-docker logs ${CONTAINER}
+	
+clean:
+	-docker stop ${CONTAINER}
+	-docker rm ${CONTAINER}
+	-docker rmi ${CONTAINER}
