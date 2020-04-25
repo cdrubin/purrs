@@ -15,6 +15,8 @@ MINIKUBE_PROFILE=$(./lib/mkube.sh profile)
 if ! ./lib/mkube.sh profile list | grep purrs > /dev/null; then
     echo "purrs minikube profile not found, creating..."
     ./lib/mkube.sh profile delete purrs && ./lib/mkube.sh profile create purrs --memory=$MEMORY --cpus=$CPUS
+    ./lib/mkube.sh profile $MINIKUBE_PROFILE > /dev/null
+    
 else
     # check purrs status and restore profile after
     ./lib/mkube.sh profile purrs > /dev/null
