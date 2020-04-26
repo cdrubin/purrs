@@ -29,9 +29,7 @@ if [ "$1" == "profile" ]; then
         minikube start --profile "$profile_name" "$@"
         minikube profile "$profile_name"
         if [ $? == 0 ]; then
-            echo "1111"
             kubectl config use-context "$profile_name"
-            echo "2222"
         fi
         ;;
         
@@ -44,7 +42,6 @@ if [ "$1" == "profile" ]; then
         ;;
         
     *) # switch profile
-        echo "!!!!"
         kubectl config use-context "$1"
         if [ $? == 0 ]; then
             minikube profile "$1"
@@ -54,5 +51,4 @@ if [ "$1" == "profile" ]; then
   exit $?
 fi
 
-echo "^^^^^"
 exec minikube "$@"
