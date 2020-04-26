@@ -9,20 +9,20 @@ MEMORY=4096
 CPUS=2
 
 # save the current minikube profile to pop back after status call
-MINIKUBE_PROFILE=$(./lib/mkube.sh profile)
+MINIKUBE_PROFILE=$(./lib/mkube.sh profile 2> /dev/null)
 
 # check that minikube profile purrs exists
 if ! ./lib/mkube.sh profile list | grep purrs > /dev/null; then
     echo "purrs minikube profile not found, creating..."
     ./lib/mkube.sh profile delete purrs && ./lib/mkube.sh profile create purrs --memory=$MEMORY --cpus=$CPUS
-    ./lib/mkube.sh profile $MINIKUBE_PROFILE > /dev/null
+    ./lib/mkube.sh profile $MINIKUBE_PROFILE
     
 else
     # check purrs status and restore profile after
-    ./lib/mkube.sh profile purrs > /dev/null
-    RUNNING=$(minikube status | grep 'Running' | wc -l)
-    CONFIGURED=$(minikube status | grep 'Configured' | wc -l)
-    ./lib/mkube.sh profile $MINIKUBE_PROFILE > /dev/null
+    ./lib/mkube.sh profile purrs &> /dev/null
+    RUNNING=$(minikube status 2> /dev/null | grep 'Running' | wc -l)
+    CONFIGURED=$(minikube status 2> /dev/null | grep 'Configured' | wc -l)
+    ./lib/mkube.sh profile $MINIKUBE_PROFILE &> /dev/null
     
     if [[ $RUNNING -ne 3 || $CONFIGURED -ne 1 ]]; then
         echo "purrs minikube profile errors, recreating..."
