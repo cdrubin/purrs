@@ -7,8 +7,8 @@ profiles:
       artifacts:
         - image: localhost:5000/openresty
           context: deployment/images/openresty
-        - image: localhost:5000/postgresql
-          context: deployment/images/postgresql
+#        - image: localhost:5000/postgresql
+#          context: deployment/images/postgresql
         - image: localhost:5000/redis
           context: deployment/images/redis
     deploy:
