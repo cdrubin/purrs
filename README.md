@@ -1,6 +1,6 @@
 # purrs
 
-purrs offers a development harness for [OpenResty](https://openresty.org) and [Lua](https://www.lua.org/) driven by [Skaffold] and [Kubectl] inside a local [Minikube] . 
+purrs offers a development harness for [OpenResty](https://openresty.org) and [Lua](https://www.lua.org/) driven by [Skaffold](https://skaffold.dev/), [Kustomize](https://kustomize.io/) and [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) inside a local [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). 
 
 ---
 ### Install required tools
