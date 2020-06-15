@@ -35,8 +35,9 @@ sudo mv minikube /usr/local/bin
 
 ```bash
 curl -s https://api.github.com/repos/kubernetes-sigs/kustomize/releases | grep browser_download | grep linux | cut -d '"' -f 4 | grep /kustomize/v | sort | tail -n 1 | xargs curl -O -L
-tar -xzvf kustomize*
+tar -xzvf kustomize_*
 sudo mv kustomize /usr/local/bin
+rm kustomize_*
 ```
 
 ---
