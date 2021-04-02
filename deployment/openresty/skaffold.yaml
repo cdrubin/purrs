@@ -1,4 +1,4 @@
-apiVersion: skaffold/v1
+apiVersion: skaffold/v2beta11
 kind: Config
 profiles:
   -
@@ -6,14 +6,16 @@ profiles:
     build:
       artifacts:
         - image: localhost:5000/openresty
-          context: deployment/images/openresty
+          context: images/openresty
 #        - image: localhost:5000/postgresql
 #          context: deployment/images/postgresql
         - image: localhost:5000/redis
-          context: deployment/images/redis
+          context: ../redis/images/redis
     deploy:
       kustomize:
-        path: deployment/overlays/development
+        paths:
+          - overlays/development
+          - ../redis/overlays/development
 
 portForward:
  - resourceType: service

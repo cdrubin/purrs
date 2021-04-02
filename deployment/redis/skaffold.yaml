@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta11
+kind: Config
+profiles:
+  -
+    name: deployment
+    build:
+      artifacts:
+        - image: localhost:5000/redis
+          context: images/redis/
+    deploy:
+      kustomize:
+        paths: 
+          - overlays/development
+
+#portForward:
+# - resourceType: service
+#   resourceName: redis
+#   namespace: default
+#   port: 6379
+#   localPort: 6379
