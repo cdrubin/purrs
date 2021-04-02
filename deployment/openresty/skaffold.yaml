@@ -7,14 +7,15 @@ profiles:
       artifacts:
         - image: localhost:5000/openresty
           context: images/openresty
-#        - image: localhost:5000/postgresql
-#          context: deployment/images/postgresql
+        - image: localhost:5000/postgresql
+          context: ../postgresql/images/postgresql
         - image: localhost:5000/redis
           context: ../redis/images/redis
     deploy:
       kustomize:
         paths:
           - overlays/development
+          - ../postgresql/overlays/development
           - ../redis/overlays/development
 
 portForward:
