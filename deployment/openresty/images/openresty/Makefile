@@ -1,1 +1,1 @@
-../../../lib/Makefile.image
+../../../../lib/Makefile.image
