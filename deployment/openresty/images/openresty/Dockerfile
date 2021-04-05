@@ -1,5 +1,22 @@
 FROM openresty/openresty:alpine-fat
+
+RUN apk add inotify-tools
+
+RUN luarocks install pgmoon && \
+  luarocks install inspect && \
+  luarocks install middleclass && \
+  luarocks install uuid && \
+  luarocks install date && \
+  luarocks install csv && \
+  luarocks install LuaFileSystem
+
 RUN rm /etc/nginx/conf.d/default.conf
+
+COPY docker-entrypoint.sh /usr/local/openresty/bin
+COPY reloader.sh /usr/local/openresty/bin
+
 COPY site.conf /etc/nginx/conf.d/
-RUN opm get xiangnanscu/pgmoon bungle/lua-resty-prettycjson
 COPY site /usr/local/openresty/site
+
+ENTRYPOINT [ "/usr/local/openresty/bin/docker-entrypoint.sh" ]
+CMD [ "/usr/local/openresty/bin/openresty", "-g", "daemon off;" ]
