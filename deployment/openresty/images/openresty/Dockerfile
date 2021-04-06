@@ -8,7 +8,8 @@ RUN luarocks install pgmoon && \
   luarocks install uuid && \
   luarocks install date && \
   luarocks install csv && \
-  luarocks install LuaFileSystem
+  luarocks install LuaFileSystem && \
+  luarocks install graphql
 
 RUN rm /etc/nginx/conf.d/default.conf
 
