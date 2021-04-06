@@ -72,7 +72,6 @@ fi
 
 lib/mkube.sh profile $MINIKUBE_PROFILE &> /dev/null
 
-
 echo
 echo "Choose the application to skaffold: "
 

@@ -1,0 +1,6 @@
+
+location = %(prefix)s/graphql/1 {
+
+  content_by_lua_file '%(dynamic)s/graphql/one.lua';
+
+}

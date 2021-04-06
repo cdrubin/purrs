@@ -7,6 +7,9 @@ profiles:
       artifacts:
         - image: localhost:5000/openresty
           context: images/openresty
+          sync:
+            infer:
+            - 'site/**/*'
         - image: localhost:5000/postgresql
           context: ../postgresql/images/postgresql
         - image: localhost:5000/redis
