@@ -1,5 +1,7 @@
 local wimbly = {}
 
+local inspect = require( 'inspect' )
+
 function wimbly.find( path, filter )
   local filter = filter or '.*'
 

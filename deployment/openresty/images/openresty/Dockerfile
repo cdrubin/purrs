@@ -2,7 +2,9 @@ FROM openresty/openresty:alpine-fat
 
 RUN apk add inotify-tools
 
-RUN luarocks install pgmoon && \
+# RUN opm get leafo/pgmoon
+
+RUN luarocks install pgmoon 1.6.0 && \
   luarocks install inspect && \
   luarocks install middleclass && \
   luarocks install uuid && \
