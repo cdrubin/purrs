@@ -2,7 +2,7 @@
 
 purrs offers a development harness for [OpenResty](https://openresty.org) and [Lua](https://www.lua.org/) driven by [Skaffold](https://skaffold.dev/), [Kustomize](https://kustomize.io/) and [Kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) inside a local [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/).
 
-Phew, that is a lot of jargon! Put more simply, purrs plans to offer a friendly, modern and easy to work with place to get started with web development using the Lua language. As a developer harness purrs is using some of the more recent technologies for 
+Phew, that is a lot of jargon! Put more simply, purrs plans to offer a friendly, modern and easy-to-work-with place to get started with web development using the Lua language. As a developer harness purrs is using some of the more recent technologies for connecting the a cache, database and web server together with immediate feedback.
 
 ---
 ### Install required tools
